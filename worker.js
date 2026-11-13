@@ -321,7 +321,7 @@ export default {
     const url = new URL(request.url);
 
     // Nur POST /redeem erlaubt
-    if (request.method !== "POST" || url.pathname !== "/redeem") {
+    if (request.method !== "POST") {
       return new Response("Not found", { status: 404 });
     }
 
