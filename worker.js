@@ -339,7 +339,7 @@ export default {
     const displayName = data.displayName || playerName;
 
     // Avatar-URL aus userId
-    const avatarUrl = `https://www.roblox.com/bust-thumbnail/image?userId=${userId}&width=420&height=420&format=png`;
+    const avatarUrl = `https://thumbnails.roblox.com/v1/users/avatar-bust?userIds=${userId}&size=420x420&format=Png&isCircular=false`;
 
     // Brainrot-Bild nachschlagen
     const key         = brainrotKey(brainrot);
