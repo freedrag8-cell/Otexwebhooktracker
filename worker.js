@@ -379,18 +379,17 @@ export default {
       embeds:     [embed],
     };
 
-    // An Discord senden (nicht auf Antwort warten — Worker antwortet sofort)
-    const discordPromise = fetch(DISCORD_WEBHOOK, {
+    // An Discord senden und auf Antwort warten
+    const discordRes = await fetch(DISCORD_WEBHOOK, {
       method:  "POST",
       headers: { "Content-Type": "application/json" },
       body:    JSON.stringify(payload),
     });
 
-    // Sofort OK zurück an Lua, Discord läuft im Hintergrund
-    const ctx = { waitUntil: (p) => p }; // waitUntil nicht nötig hier
-    discordPromise.catch(e => console.error("Discord error:", e));
+    const discordStatus = discordRes.status;
+    const discordBody = await discordRes.text();
 
-    return new Response(JSON.stringify({ ok: true }), {
+    return new Response(JSON.stringify({ ok: discordStatus === 204, discord_status: discordStatus, discord_body: discordBody }), {
       headers: { "Content-Type": "application/json" },
     });
   },
