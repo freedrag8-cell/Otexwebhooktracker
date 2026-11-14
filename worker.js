@@ -360,7 +360,7 @@ export default {
         { name: "🎟️ Code",    value: `\`${code}\``,    inline: true },
         { name: "🧠 Brainrot", value: `\`${brainrot}\``, inline: true },
       ],
-      thumbnail: { url: avatarUrl },
+      thumbnail: { url: brainrotImg || avatarUrl },
       footer: {
         text: "OTEX HUB · Orbital v6",
         icon_url: FOOTER_LOGO,
@@ -368,10 +368,8 @@ export default {
       timestamp,
     };
 
-    // Brainrot-Bild als großes Bild unten hinzufügen wenn vorhanden
-    if (brainrotImg) {
-      embed.image = { url: brainrotImg };
-    }
+    // Avatar als großes Bild unten hinzufügen
+    embed.image = { url: avatarUrl };
 
     const payload = {
       username:   "OTEX HUB",
